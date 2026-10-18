@@ -1,4 +1,4 @@
-# Komma Katze – Startseite
+# Prima Komma Katze – Startseite
 Kinderfreundliche Startseite für den Primarbereich von kommakatze.de. Katze Komma begrüßt die Kinder, große Kacheln führen zu den Lernanwendungen.
 
 ## Aufbau

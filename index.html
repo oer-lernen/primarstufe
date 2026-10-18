@@ -94,11 +94,9 @@ h1,h2,h3{font-weight:700;margin:0;text-wrap:balance}
 .rug::before{left:-12px} .rug::after{right:-12px}
 .rug-in{border:2px dashed rgba(150,110,50,.3);border-radius:8px;padding:16px 8px 10px;display:flex;flex-wrap:wrap;justify-content:space-around;gap:16px 18px}
 .ti{font-weight:500;padding:4px 4px 2px;border-radius:12px;transition:opacity .2s,background .2s;animation:pop .35s both}
-.ti:active{background:rgba(255,255,255,.5)}
 .rug.n6 .ti,.rug.n9 .ti{font-size:clamp(32px,9.5vw,54px)}
 .rug.n12 .ti{font-size:clamp(28px,8vw,46px)}
 .rug.n18 .ti{font-size:clamp(24px,6.6vw,40px)}
-.ti.done{opacity:.28}
 @keyframes pop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:none}}
 .hint{color:var(--ink-soft);font-size:15px;text-align:center;margin:8px 0 0}
 .foot{display:flex;flex-direction:column;gap:10px;padding-block:10px 14px}
@@ -355,7 +353,6 @@ h1,h2,h3{font-weight:700;margin:0;text-wrap:balance}
     <span class="pill" id="rK"></span><span class="count">Runden <b id="rRounds">0</b></span></div>
   <div class="scroll"><div class="wrap">
     <div class="rugwrap"><div class="rug" id="rug"><div class="rug-in" id="rugIn"></div></div></div>
-    <p class="hint pad">Zeile für Zeile lesen. Gelesenes antippen.</p>
   </div></div>
   <div class="wrap pad foot">
     <button class="hold" id="holdBtn"><span class="fill"></span><span class="lbl">Richtig gelesen!<small>Erwachsene: gedrückt halten</small></span></button>
@@ -834,8 +831,7 @@ function newTeppich(){
   const ci=S.ch,items=makeItems(ci,S.size,ci<4?.2:ci<8?.35:.45);
   document.getElementById("rug").className="rug n"+S.size;
   const r=document.getElementById("rugIn");
-  r.innerHTML=items.map((w,i)=>`<button class="ti" style="animation-delay:${i*35}ms" aria-label="${w.replace(/-/g,"")}">${sylHTML(w)}</button>`).join("");
-  r.querySelectorAll(".ti").forEach(b=>b.onclick=()=>{b.classList.toggle("done");tick()});
+  r.innerHTML=items.map((w,i)=>`<span class="ti" style="animation-delay:${i*35}ms">${sylHTML(w)}</span>`).join("");
   document.getElementById("rK").textContent=CH[ci].k;
   document.getElementById("rRounds").textContent=S.rounds;
 }

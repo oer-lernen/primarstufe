@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Komma Katze</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Komma Katze – Lesen, Malen und Musik für Kinder.">
+<meta name="description" content="Komma Katze – Lesen, Malen, Musik und Rechnen für Kinder.">
 <style>
 /* Layout: Himmel mit Pixelwolken, Katze Komma neben bunter Überschrift, drei gestreifte Spielkacheln, unten eine grüne Wiese mit den Hinweisen für Erwachsene.
    DSGVO: nur Systemschriften, keine externen Dateien, keine Cookies, kein Speicher. */
@@ -14,6 +14,7 @@
   --lesen:#4fd08f; --lesen2:#7ee0ad; --lesen-d:#1f8a57;
   --malen:#ff7a68; --malen2:#ffa190; --malen-d:#d4432f;
   --musik:#8c86ff; --musik2:#aaa6ff; --musik-d:#4e47d1;
+  --rechnen:#ffb938; --rechnen2:#ffd06b; --rechnen-d:#b86e00;
   --sun:#ffd23f; --pink:#ff6fae; --tile-ink:#2f1f15; --focus:#ff4f9a;
   --hill:#7fd66a; --hill2:#5fbf4f; --hill-ink:#1f4a17;
   --fur:#dba468; --stripe:#b07a43; --line:#4a2f1d; --white:#fffaf3; --eye:#2b1d14; --nose:#f08aa0; --cheek:#f7a8a0;
@@ -24,11 +25,13 @@
   --sky1:#1d2152; --sky2:#4a2b5e; --cloud:#cfd3ff; --ink:#fff4e6; --card:#2c2f55;
   --lesen:#2a9a66; --lesen2:#33ad75; --malen:#d3533f; --malen2:#e0654f; --musik:#5a52d6; --musik2:#6a63e3;
   --lesen-d:#8ff0bf; --malen-d:#ffb1a2; --musik-d:#c5c2ff;
+  --rechnen:#c98612; --rechnen2:#d9971f; --rechnen-d:#ffd27a;
   --tile-ink:#fffaf2; --focus:#ffb3d6; --hill:#2f7a3a; --hill2:#256530; --hill-ink:#e6ffd9; --line:#2a1a10; color-scheme:dark}}
 :root[data-theme="dark"]{
   --sky1:#1d2152; --sky2:#4a2b5e; --cloud:#cfd3ff; --ink:#fff4e6; --card:#2c2f55;
   --lesen:#2a9a66; --lesen2:#33ad75; --malen:#d3533f; --malen2:#e0654f; --musik:#5a52d6; --musik2:#6a63e3;
   --lesen-d:#8ff0bf; --malen-d:#ffb1a2; --musik-d:#c5c2ff;
+  --rechnen:#c98612; --rechnen2:#d9971f; --rechnen-d:#ffd27a;
   --tile-ink:#fffaf2; --focus:#ffb3d6; --hill:#2f7a3a; --hill2:#256530; --hill-ink:#e6ffd9; --line:#2a1a10; color-scheme:dark}
 
 *{box-sizing:border-box}
@@ -60,7 +63,7 @@ h1 .l:nth-child(4n+3){color:var(--lesen2)} h1 .l:nth-child(4n+4){color:var(--mus
 h1 .l:nth-child(odd){transform:rotate(-4deg)} h1 .l:nth-child(even){transform:rotate(3deg) translateY(2px)}
 
 /* Kacheln */
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 32px;max-width:860px;width:100%;margin:0 auto}
 .tile{--c:var(--lesen);--c2:var(--lesen2);
   display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;
   padding:28px 18px 24px;color:var(--tile-ink);text-decoration:none;
@@ -69,7 +72,8 @@ h1 .l:nth-child(odd){transform:rotate(-4deg)} h1 .l:nth-child(even){transform:ro
   transition:transform .15s ease,box-shadow .15s ease}
 .tile.malen{--c:var(--malen);--c2:var(--malen2)}
 .tile.musik{--c:var(--musik);--c2:var(--musik2)}
-.tile:nth-child(1){transform:rotate(-1.5deg)} .tile:nth-child(3){transform:rotate(1.5deg)}
+.tile.rechnen{--c:var(--rechnen);--c2:var(--rechnen2)}
+.tile:nth-child(odd){transform:rotate(-1.5deg)} .tile:nth-child(even){transform:rotate(1.5deg)}
 .tile:hover{transform:translateY(-8px) rotate(0) scale(1.03);box-shadow:0 16px 0 var(--ink)}
 .tile:active{transform:translateY(5px);box-shadow:0 3px 0 var(--ink)}
 .tile:focus-visible,.cat:focus-visible,.foot button:focus-visible,dialog button:focus-visible,dialog a:focus-visible{outline:4px dashed var(--focus);outline-offset:6px}
@@ -114,7 +118,7 @@ dialog::backdrop{background:rgba(30,20,40,.55)}
 
 @media (max-width:760px){
   .tiles{grid-template-columns:1fr;gap:20px}
-  .tile,.tile:nth-child(1),.tile:nth-child(3){transform:none;flex-direction:row;text-align:left;padding:16px 18px;gap:16px}
+  .tile,.tile:nth-child(odd),.tile:nth-child(even){transform:none;flex-direction:row;text-align:left;padding:16px 18px;gap:16px}
   .icon{width:96px;flex:none}
   .txt{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0}
   .label{font-size:1.6rem;padding:4px 18px}
@@ -153,6 +157,10 @@ dialog::backdrop{background:rgba(30,20,40,.55)}
       <span class="icon"><svg data-map="note" viewBox="0 0 12 12" aria-hidden="true"></svg></span>
       <span class="txt"><span class="label">Musik</span><span class="sub">Töne antippen und Musik bauen</span></span>
     </a>
+    <a class="tile rechnen" href="https://rechnen.kommakatze.de/">
+      <span class="icon"><svg data-map="abacus" viewBox="0 0 12 12" aria-hidden="true"></svg></span>
+      <span class="txt"><span class="label">Rechnen</span><span class="sub">Kugeln schieben und zählen</span></span>
+    </a>
   </nav>
 </main>
 
@@ -179,7 +187,7 @@ dialog::backdrop{background:rgba(30,20,40,.55)}
     <h3>Verantwortlich für den Inhalt (§ 18 Abs. 2 MStV)</h3>
     <p>Sebastian Wolf, Anschrift wie oben.</p>
     <h3>Links</h3>
-    <p>Die Kacheln führen zu Lernangeboten desselben Anbieters (silbe., atelier. und orchester.kommakatze.de). Dort gelten jeweils eigene Hinweise.</p>
+    <p>Die Kacheln führen zu Lernangeboten desselben Anbieters (silbe., atelier., orchester. und rechnen.kommakatze.de). Dort gelten jeweils eigene Hinweise.</p>
   </section>
 
   <section class="pane" id="p-ds" hidden>
@@ -209,7 +217,7 @@ dialog::backdrop{background:rgba(30,20,40,.55)}
 (function(){
   // Pixel-Bilder: ein Buchstabe = ein Pixel
   var C={o:'var(--line)',b:'var(--fur)',s:'var(--stripe)',w:'var(--white)',e:'var(--eye)',h:'#ffffff',p:'var(--nose)',k:'var(--cheek)',
-         l:'#c7b9a6',c:'var(--lesen)',y:'#ffd23f',r:'#ff6b6b',g:'#4fd08f',u:'#6f7bff',n:'var(--musik)',t:'#f1cf9f',
+         l:'#c7b9a6',c:'var(--lesen)',y:'#ffd23f',r:'#ff6b6b',g:'#4fd08f',u:'#6f7bff',n:'var(--musik)',t:'#f1cf9f',q:'var(--stripe)',
          x:'var(--cloud)',f:'#ff6fae',d:'#ffd23f',m:'#ffffff'};
   var MAPS={
     cat:[".o.......o......","obo.....obo.....","obpooooopbo.....","obbsbbbsbbo.....","obbbbbbbbbo.....",
@@ -218,6 +226,8 @@ dialog::backdrop{background:rgba(30,20,40,.55)}
     book:["............",".oooo..oooo.","owwwwoowwwwo","owllwoowllwo","owwwwoowwwwo","owllwoowllwo","owwwwoowwwwo","owllwoowllwo","owwwwoowwwwo","occccoocccco",".oooooooooo.","............"],
     palette:["............","...oooooo...",".oottttttoo.","ottrrttyytto","ottrrttyytto","otttttttttto","otggtttuutto","otggtttuutto",".otttto.otto","..ooooo..oo.","............","............"],
     note:["....oooooooo","....onnnnnno","....oooooooo","....o......o","....o......o","....o......o","....o......o",".oooo...oooo","onnno..onnno","onnno..onnno",".ooo....ooo.","............"],
+    abacus:["oooooooooooo","o..........o","orrrrruqqqqo","o..........o","orrruuuqqqqo","o..........o",
+            "orrrruuuuqqo","o..........o","orruuuqqqqqo","o..........o","oooooooooooo",".o........o."],
     cloud:["....xxx.....","..xxxxxxx...",".xxxxxxxxxx.","xxxxxxxxxxxx","xxxxxxxxxxxx",".xxxxxxxxxx."]
   };
   var NS='http://www.w3.org/2000/svg';
@@ -271,11 +281,14 @@ dialog::backdrop{background:rgba(30,20,40,.55)}
       g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.35,t+.06);g.gain.exponentialRampToValueAtTime(.0001,t+.28);
       src.connect(bp);bp.connect(g);g.connect(a.destination);src.start(t);tone(a,'sine',380,.26,.12,.2,900);},
     // Musik: fröhlicher Dreiklang aufwärts
-    musik:function(a){[523,659,784,1047].forEach(function(f,i){tone(a,'triangle',f,i*.08,.22,.16);});}
+    musik:function(a){[523,659,784,1047].forEach(function(f,i){tone(a,'triangle',f,i*.08,.22,.16);});},
+    // Rechnen: drei Holzkugeln klacken, dann ein helles Pling
+    rechnen:function(a){[0,.11,.22].forEach(function(d,i){tone(a,'square',1500+i*180,d,.045,.09,700);tone(a,'sine',320+i*40,d,.06,.18);});
+      tone(a,'sine',1568,.36,.35,.14);tone(a,'sine',2093,.38,.3,.06);}
   };
   document.querySelectorAll('.tile').forEach(function(t){t.addEventListener('click',function(e){
     if(e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0)return;
-    var a=audio(),kind=t.classList.contains('lesen')?'lesen':t.classList.contains('malen')?'malen':'musik';
+    var a=audio(),kind=['lesen','malen','musik','rechnen'].filter(function(k){return t.classList.contains(k);})[0];
     if(!a)return;
     e.preventDefault();try{SFX[kind](a);}catch(_){}
     setTimeout(function(){location.href=t.href;},420);

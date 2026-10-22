@@ -291,6 +291,8 @@ dialog::backdrop{background:rgba(30,20,40,.55)}
     o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+len);
     g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+len);
     o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+len+.02);}
+  /* Länge der Klänge in Sekunden (letzter Ton endet), danach geht es zur App */
+  var LAENGE={lesen:.38,malen:.52,musik:.48,rechnen:.74};
   var SFX={
     // Zugpfeife: tuut-tuut
     lesen:function(a){[0,.2].forEach(function(d){tone(a,'square',587,d,.16,.06);tone(a,'square',740,d,.16,.04);});},
@@ -310,8 +312,14 @@ dialog::backdrop{background:rgba(30,20,40,.55)}
     if(e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0)return;
     var a=audio(),kind=['lesen','malen','musik','rechnen'].filter(function(k){return t.classList.contains(k);})[0];
     if(!a)return;
-    e.preventDefault();try{SFX[kind](a);}catch(_){}
-    setTimeout(function(){location.href=t.href;},420);
+    e.preventDefault();
+    /* Erst weiterleiten, wenn der Klang zu Ende ist. Beim ersten Tippen startet die Tonausgabe erst noch:
+       dann auf resume() warten, damit der Klang nicht verspätet beginnt und abgeschnitten wird. */
+    var weiter=false,los=function(){if(weiter)return;weiter=true;location.href=t.href;};
+    var spiele=function(){try{SFX[kind](a);}catch(_){}setTimeout(los,Math.round((LAENGE[kind]||.5)*1000)+120);};
+    if(a.state==='running')spiele();
+    else{var p=a.resume();if(p&&p.then)p.then(spiele,los);else spiele();}
+    setTimeout(los,1500);   /* Sicherheitsnetz, falls die Tonausgabe gar nicht startet */
   });});
 
   // Info-Fenster

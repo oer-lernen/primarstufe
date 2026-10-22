@@ -1,6 +1,6 @@
 # Komma Katze – Startseite
 
-Kinderfreundliche Startseite von **kommakatze.de**. Katze Komma begrüßt die Kinder, und vier große Kacheln führen zu den Lernangeboten:
+Kinderfreundliche Startseite für die Primarstufe unter **prima.kommakatze.de**. (Unter www.kommakatze.de liegt die Sprachdetektei „Komma ermittelt“ für ältere Kinder; beide Seiten verweisen im Fuß aufeinander.) Katze Komma begrüßt die Kinder, und vier große Kacheln führen zu den Lernangeboten:
 
 | Kachel | Ziel | Inhalt | Klang beim Antippen |
 |---|---|---|---|
@@ -18,6 +18,15 @@ Die ganze Seite besteht aus **einer Datei**: `index.html` (HTML, CSS und JavaScr
 - **Katze Komma** blinzelt alle paar Sekunden. Tippt man sie an, hüpft sie und miaut.
 - **Hell- und Dunkelmodus** folgen automatisch der Geräteeinstellung.
 - **Barrierearmut:** Die Seite lässt sich mit der Tastatur bedienen und hat sichtbare Fokusrahmen. Wer „Bewegung reduzieren“ eingestellt hat, sieht keine Animationen. Auf großen Bildschirmen stehen die Kacheln im 2×2-Raster, auf dem Handy untereinander.
+
+## Gemeinsame Regeln für alle Apps
+
+- **Rechtstexte:** Impressum, Datenschutz und Lizenz folgen derselben Vorlage (Muster: Silbenexpress) mit Stand-Datum.
+- **Speichern:** nur mit Einwilligung eines Erwachsenen („Eine Frage an die Erwachsenen“), Widerruf im Elternmenü löscht sofort alles.
+- **Elternmenü:** 2 Sekunden gedrückt halten.
+- **Zur Startseite:** Haus-Knopf in jeder App, offline ausgeblendet.
+- **Kopf jeder Datei:** `<!doctype html>`, `<html lang="de">`, Content-Security-Policy ohne Verbindungen nach außen, `no-referrer`, Favicon, Titel „App – Komma Katze“.
+- **Transparenzhinweis** im Lizenz-Text jeder App.
 
 ## Datenschutz (DSGVO)
 
@@ -48,7 +57,7 @@ Impressum, Datenschutzerklärung und Lizenzhinweis stehen in der Wiese am Seiten
 
 1. `index.html` und `README.md` in das Repository legen (Hauptzweig, Wurzelverzeichnis).
 2. Unter *Settings → Pages* als Quelle den Branch wählen.
-3. Die eigene Domain `kommakatze.de` eintragen (dabei entsteht die Datei `CNAME`) und *Enforce HTTPS* aktivieren.
+3. Die eigene Domain `prima.kommakatze.de` eintragen (dabei entsteht die Datei `CNAME`) und *Enforce HTTPS* aktivieren.
 4. Beim Domain-Anbieter die DNS-Einträge für GitHub Pages setzen. Die Subdomains `silbe`, `atelier`, `orchester` und `rechnen` zeigen jeweils auf ihr eigenes Repository.
 
 ## Lizenz
@@ -61,3 +70,5 @@ Namensnennung: „Komma Katze von Sebastian Wolf, CC BY-SA 4.0“
 ## Kontakt
 
 Sebastian Wolf · s.w.oer@outlook.de
+
+**Transparenzhinweis:** Programmiert mit Unterstützung von KI (Claude, Anthropic). Idee, Inhalte und fachliche Prüfung: Sebastian Wolf.
